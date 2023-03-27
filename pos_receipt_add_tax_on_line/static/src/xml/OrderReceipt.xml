@@ -1,0 +1,45 @@
+<templates id="template" xml:space="preserve">
+  <t t-inherit="point_of_sale.OrderLinesReceipt" t-inherit-mode="extension" owl="1">
+    <!-- Attributes position xpath only apply to first match for some reason: -->
+    <!-- https://github.com/odoo/odoo/issues/23862 -->
+
+    <!-- Simple price -->
+    <xpath expr="(//span[hasclass('price_display')])[1]" position="replace">
+      <span class="price_display pos-receipt-right-align">
+        <t t-esc="env.pos.format_currency_no_symbol(line.price_display)" />
+          <t t-if="Math.round((line.price_with_tax/line.price_without_tax-1)*100)==19">*A</t>
+          <t t-if="Math.round((line.price_with_tax/line.price_without_tax-1)*100)==7">*B</t>
+          <t t-if="Math.round((line.price_with_tax/line.price_without_tax-1)*100)==16">*C</t>
+      </span>
+    </xpath>
+    <xpath expr="(//span[hasclass('price_display')])[2]" position="inside">
+          <t t-if="Math.round((line.price_with_tax/line.price_without_tax-1)*100)==19">*A</t>
+          <t t-if="Math.round((line.price_with_tax/line.price_without_tax-1)*100)==7">*B</t>
+          <t t-if="Math.round((line.price_with_tax/line.price_without_tax-1)*100)==16">*C</t>
+    </xpath>
+
+
+  </t>
+  <t t-inherit="point_of_sale.OrderReceipt" t-inherit-mode="extension">
+
+    <!-- Tax not included -->
+    <xpath expr="//t[@t-esc='tax.name']" position="after">
+      <t t-esc="tax.id"/>
+      <t t-esc="tax.base"/>
+      <t t-if="tax.name=='19% Umsatzsteuer'"> A</t>
+      <t t-if="tax.name=='7% Umsatzsteuer'"> B</t>
+      <t t-if="tax.name=='16% Umsatzsteuer'"> C</t>
+    </xpath>
+
+    <!--  Tax included -->
+    <xpath expr="(//t[@t-esc='tax.name'])[2]" position="after">
+     <t t-esc="tax.id"/>
+      <t t-esc="tax.base"/>
+      <t t-if="tax.name=='19% Umsatzsteuer'"> A</t>
+      <t t-if="tax.name=='7% Umsatzsteuer'"> B</t>
+      <t t-if="tax.name=='16% Umsatzsteuer'"> C</t>
+    </xpath>
+
+    
+  </t>
+</templates>
