@@ -1,1 +1,0 @@
-This module adds a marker to every sales line on the receipt to indentify the tax that applies on the product
