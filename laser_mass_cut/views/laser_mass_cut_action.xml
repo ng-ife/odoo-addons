@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Action to open wizard -->
+    <record id="action_open_laser_mass_cut_wizard" model="ir.actions.act_window">
+        <field name="name">Process Laser Cut</field>
+        <field name="res_model">laser.mass.cut.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_laser_mass_cut_wizard_form" />
+        <field name="target">new</field>
+        <field name="context">{'default_mrp_order_ids': active_ids}</field>
+    </record>
+
+    <!-- Add button to mrp.production list view -->
+    <record id="mrp_production_batch_process_button" model="ir.ui.view">
+        <field name="name">mrp.production.list.batch.process</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_tree_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//list/header" position="inside">
+                <button
+                    name="%(action_open_laser_mass_cut_wizard)d"
+                    string="Process Laser Cut"
+                    type="action"
+                    context="{}"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>

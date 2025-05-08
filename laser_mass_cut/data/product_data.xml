@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="product_steel_sheet" model="product.product">
+        <field name="name">Steel Sheet</field>
+        <field name="is_storable">True</field>
+        <field name="list_price">50.0</field>
+        <field name="standard_price">30.0</field>
+        <field name="sale_ok">False</field>
+        <field name="purchase_ok">True</field>
+        <field
+            name="image_1920"
+            type="base64"
+            file="laser_mass_cut/static/img/steel_sheet.png"
+        />
+    </record>
+
+    <record id="product_steel_sheet_offcut" model="product.product">
+        <field name="name">Steel Sheet Offcut</field>
+        <field name="is_storable">True</field>
+        <field name="list_price">25.0</field>
+        <field name="standard_price">15.0</field>
+        <field name="sale_ok">False</field>
+        <field name="purchase_ok">True</field>
+        <field
+            name="image_1920"
+            type="base64"
+            file="laser_mass_cut/static/img/steel_sheet_offcut.png"
+        />
+    </record>
+
+    <record id="product_steel_piece" model="product.product">
+        <field name="name">Steel Piece</field>
+        <field name="is_storable">True</field>
+        <field name="list_price">0.0</field>
+        <field name="standard_price">0.0</field>
+        <field name="sale_ok">False</field>
+        <field name="purchase_ok">False</field>
+    </record>
+</odoo>
