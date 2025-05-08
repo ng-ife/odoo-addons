@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- TODO: Add lines into table  -->
+    <!-- l10n_din5008.external_layout_din5008 manipulations -->
+    <template
+        id="external_layout_din5008_inherit"
+        inherit_id="l10n_din5008.external_layout_din5008"
+    >
+        <!-- Manipulate Logo-Image -->
+        <xpath expr="//table[hasclass('company_header')]//img" position="attributes">
+            <attribute name="t-att-style">
+                "max-height: 20mm;"
+            </attribute>
+        </xpath>
+
+        <!-- Always hide country from company header adress -->
+        <xpath expr="//t[contains(@t-if, 'company.country_id')]" position="attributes">
+            <attribute name="t-if" add="False" separator="and" />
+        </xpath>
+
+        <!-- Replace Adress Block to Remove Country, VAT, Phone -->
+        <xpath expr="//hr[hasclass('company_invoice_line')]" position="after">
+            <t t-if="o and o.partner_id">
+                <t t-set="address">
+                    <t
+                        t-out="o.partner_id"
+                        t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True, "no_country": report_hide_country}'
+                    />
+                </t>
+            </t>
+        </xpath>
+
+        <!-- Hide Country from customer adress -->
+        <xpath expr="//t[@t-out='fallback_address']" position="attributes">
+            <attribute
+                name="t-options"
+            >{"widget": "contact", "fields": ["address", "name"], "no_marker": True, "no_country": report_hide_country}</attribute>
+        </xpath>
+
+        <!-- Add reference under document title -->
+        <xpath expr="//h2" position="after">
+            <div class="customer_ref">
+                <t t-out="din5008_document_ref" />
+            </div>
+        </xpath>
+
+        <!-- Add Registry Court -->
+        <xpath expr="//span[@t-field='company.company_registry']/.." position="after">
+            <li t-if="company.registry_court">
+                Registry Court: <span t-field="company.registry_court" />
+            </li>
+        </xpath>
+
+        <!-- Add Country in Footer and hide if Customer = Germany -->
+        <xpath expr="//li[contains(@t-if,'company.company_details')]" position="after">
+            <li t-if="not report_hide_country and company.country_id">
+                <span t-field="company.country_id" />
+            </li>
+        </xpath>
+        <xpath
+            expr="//td[contains(@t-if,'company.partner_id.bank_ids')]"
+            position="attributes"
+        >
+            <attribute name="class">bank_details</attribute>
+        </xpath>
+    </template>
+
+    <!-- l10n_din5008.report_invoice_document manipulation -->
+    <template
+        id="report_invoice_document_din5008"
+        inherit_id="l10n_din5008.report_invoice_document"
+    >
+        <!-- Hide invociename from top right and move to Title -->
+        <xpath expr="//t[@t-set='din5008_document_title']/span" position="inside">
+            <t t-out="o.name" />
+        </xpath>
+        <xpath expr="//tr[@t-if='o.name']" position="attributes">
+            <attribute name="class">
+            d-none
+        </attribute>
+        </xpath>
+        <!-- Always Hide Delivery Date -->
+        <xpath expr="//tr[@t-if='o.delivery_date']" position="attributes">
+            <attribute name="class">
+                d-none
+            </attribute>
+        </xpath>
+        <!-- TODO: rename x_studio_leistungszeitraum -> performance_period -->
+        <!-- Add Purchase Period -->
+        <xpath expr="//tr[@t-if='o.delivery_date']" position="after">
+            <tr t-if="o.x_studio_leistungszeitraum">
+                <td>Performance Period</td>
+                <td>
+                    <t t-out="o.x_studio_leistungszeitraum" />
+                </td>
+            </tr>
+        </xpath>
+
+        <!-- Hide Country in Shipping and Beneficary Adress Block -->
+        <xpath expr="//address[@t-esc='o.partner_shipping_id']" position="attributes">
+            <attribute
+                name="t-options"
+            >{"widget": "contact", "fields": ["address", "name"], "no_marker": True, "no_country": report_hide_country}</attribute>
+        </xpath>
+        <xpath expr="//address[@t-esc='o.commercial_partner_id']" position="attributes">
+            <attribute
+                name="t-options"
+            >{"widget": "contact", "fields": ["address", "name"], "no_marker": True, "no_country": report_hide_country}</attribute>
+        </xpath>
+    </template>
+</odoo>

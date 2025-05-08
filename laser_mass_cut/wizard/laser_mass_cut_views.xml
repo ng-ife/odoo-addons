@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Wizard form view -->
+    <record id="view_laser_mass_cut_wizard_form" model="ir.ui.view">
+        <field name="name">laser.mass.cut.wizard.form</field>
+        <field name="model">laser.mass.cut.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Process Laser Cut Orders">
+                <sheet>
+                    <group>
+                        <field
+                            name="selected_material_product_id"
+                            invisible="not steel_piece_order_ids or not show_material_selection"
+                        />
+                        <field
+                            name="steel_piece_order_ids"
+                            widget="many2many_tags"
+                            invisible="not steel_piece_order_ids"
+                        />
+                        <field
+                            name="steel_piece_total_qty"
+                            invisible="not steel_piece_order_ids"
+                        />
+                        <field
+                            name="produce_offcut"
+                            invisible="not steel_piece_order_ids"
+                        />
+                    </group>
+
+                    <div invisible="steel_piece_order_ids">
+                        <div class="alert alert-info" role="status">
+                            No confirmed manufacturing orders with Steel Piece as component were found.
+                        </div>
+                    </div>
+
+                    <footer>
+                        <button
+                            string="Create Production Order"
+                            type="object"
+                            name="process_orders"
+                            class="btn-primary"
+                            invisible="not steel_piece_order_ids"
+                        />
+                        <button string="Cancel" special="cancel" />
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>
