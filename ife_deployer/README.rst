@@ -17,18 +17,13 @@ Steel Sheet Configurator
     :target: http://www.gnu.org/licenses/lgpl-3.0-standalone.html
     :alt: License: LGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-ng--ife%2Fodoo--addons-lightgray.png?logo=github
-    :target: https://github.com/ng-ife/odoo-addons/tree/18.0/laser_mass_cut
+    :target: https://github.com/ng-ife/odoo-addons/tree/18.0/ife_deployer
     :alt: ng-ife/odoo-addons
 
 |badge1| |badge2| |badge3|
 
-Laser Cutter Sheet Configuration Module
-=======================================
-
-This Odoo module is designed to streamline the process of configuring
-metal sheets for laser cutting. It provides tools to easily decide how
-many pieces fit onto a steel sheet and make the pieces available for
-production.
+IFE Deployer
+============
 
 **Table of contents**
 
@@ -38,7 +33,7 @@ production.
 Changelog
 =========
 
--  18.0.0.0.1: Initial module
+- 18.0.0.0.1: Initial module
 
 Bug Tracker
 ===========
@@ -46,7 +41,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/ng-ife/odoo-addons/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/ng-ife/odoo-addons/issues/new?body=module:%20laser_mass_cut%0Aversion:%2018.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/ng-ife/odoo-addons/issues/new?body=module:%20ife_deployer%0Aversion:%2018.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -61,11 +56,11 @@ Authors
 Contributors
 ------------
 
--  Niels Göttsch ng@ife.de
+- Niels Göttsch ng@ife.de
 
 Maintainers
 -----------
 
-This module is part of the `ng-ife/odoo-addons <https://github.com/ng-ife/odoo-addons/tree/18.0/laser_mass_cut>`_ project on GitHub.
+This module is part of the `ng-ife/odoo-addons <https://github.com/ng-ife/odoo-addons/tree/18.0/ife_deployer>`_ project on GitHub.
 
 You are welcome to contribute.

@@ -38,7 +38,7 @@ production.
 Changelog
 =========
 
--  18.0.0.0.1: Initial module
+- 18.0.0.0.1: Initial module
 
 Bug Tracker
 ===========
@@ -61,7 +61,7 @@ Authors
 Contributors
 ------------
 
--  Niels Göttsch ng@ife.de
+- Niels Göttsch ng@ife.de
 
 Maintainers
 -----------

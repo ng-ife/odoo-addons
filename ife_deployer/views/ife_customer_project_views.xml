@@ -4,8 +4,8 @@
         <field name="name">ife.customer.project.list</field>
         <field name="arch" type="xml">
             <list>
-                <field name="name"/>
-                <field name="github_url"/>
+                <field name="name" />
+                <field name="github_url" />
             </list>
         </field>
     </record>
@@ -16,9 +16,9 @@
             <form>
                 <sheet>
                     <group>
-                        <field name="name"/>
-                        <field name="github_url"/>
-                        <field name="environment_ids"/>
+                        <field name="name" />
+                        <field name="github_url" />
+                        <field name="environment_ids" />
                     </group>
                 </sheet>
             </form>

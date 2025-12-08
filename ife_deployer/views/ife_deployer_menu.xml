@@ -1,9 +1,27 @@
 <odoo>
-    <menuitem id="ife_deployer_root_menu" name="IFE Deployer" sequence="10"/>
-    <menuitem id="ife_customer_project_menu" name="Customer Projects" parent="ife_deployer_root_menu" action="ife_customer_project_action"/>
-    <menuitem id="ife_environment_menu" name="Environments" parent="ife_deployer_root_menu" action="ife_environment_action"/>
+    <menuitem id="ife_deployer_root_menu" name="IFE Deployer" sequence="10" />
+    <menuitem
+        id="ife_customer_project_menu"
+        name="Customer Projects"
+        parent="ife_deployer_root_menu"
+        action="ife_customer_project_action"
+    />
+    <menuitem
+        id="ife_environment_menu"
+        name="Environments"
+        parent="ife_deployer_root_menu"
+        action="ife_environment_action"
+    />
     <menuitem id="ife_module_menu" name="Modules" parent="ife_deployer_root_menu">
-        <menuitem id="ife_module_module_menu" name="Modules"  action="ife_module_action"/>
-        <menuitem id="ife_module_foldername_menu" name="Folders" action="ife_foldername_action"/>
+        <menuitem
+            id="ife_module_module_menu"
+            name="Modules"
+            action="ife_module_action"
+        />
+        <menuitem
+            id="ife_module_foldername_menu"
+            name="Folders"
+            action="ife_foldername_action"
+        />
     </menuitem>
 </odoo>
