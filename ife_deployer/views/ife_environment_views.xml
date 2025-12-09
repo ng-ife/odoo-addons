@@ -3,10 +3,10 @@
         <field name="name">ife.environment.list</field>
         <field name="model">ife.environment</field>
         <field name="arch" type="xml">
-            <list>
-                <field name="name" />
-                <field name="branch" />
-                <field name="customer_project_id" />
+            <list default_group_by="customer_project_id">
+                <field name="customer_project_id"/>
+                <field name="name"/>
+                <field name="branch_id"/>
             </list>
         </field>
     </record>
@@ -15,18 +15,21 @@
         <field name="model">ife.environment</field>
         <field name="arch" type="xml">
             <form>
+                <header>
+                    <button name="export_config_yaml" string="Export Config YAML" type="object" class="oe_highlight"/>
+                </header>
                 <sheet>
                     <group>
-                        <field name="name" />
-                        <field name="branch" />
-                        <field name="customer_project_id" />
+                        <field name="name"/>
+                        <field name="branch_id"/>
+                        <field name="customer_project_id"/>
                     </group>
                     <notebook>
                         <page string="Modules">
                             <field name="module_ids">
                                 <list>
-                                    <field name="name" />
-                                    <field name="folder_id" />
+                                    <field name="name"/>
+                                    <field name="folder_id"/>
                                 </list>
                             </field>
                         </page>

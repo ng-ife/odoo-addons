@@ -6,5 +6,16 @@ class CustomerProject(models.Model):
     _description = "Customer Project"
 
     name = fields.Char(required=True)
-    github_url = fields.Char(required=True)
+    config_repo_id = fields.Many2one(
+        'ife.repo',
+        string='Config Repository',
+        required=True,
+        domain=[('type', '=', 'config')]
+    )
+    project_repo_id = fields.Many2one(
+        'ife.repo',
+        string='Project Repository',
+        required=True,
+        domain=[('type', '=', 'project')]
+    )
     environment_ids = fields.One2many("ife.environment", "customer_project_id")

@@ -5,7 +5,8 @@
         <field name="arch" type="xml">
             <list>
                 <field name="name" />
-                <field name="github_url" />
+                <field name="config_repo_id" />
+                <field name="project_repo_id" />
             </list>
         </field>
     </record>
@@ -17,8 +18,14 @@
                 <sheet>
                     <group>
                         <field name="name" />
-                        <field name="github_url" />
-                        <field name="environment_ids" />
+                        <field name="config_repo_id" />
+                        <field name="project_repo_id" />
+                        <field name="environment_ids">
+                            <list>
+                                <field name="name" />
+                                <field name="branch_id" />
+                            </list>
+                        </field>
                     </group>
                 </sheet>
             </form>

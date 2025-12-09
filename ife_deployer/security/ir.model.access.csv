@@ -1,6 +1,9 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
 access_ife_customer_project_user,ife.customer.project.user,model_ife_customer_project,base.group_user,1,1,1,1
 access_ife_environment_user,ife.environment.user,model_ife_environment,base.group_user,1,1,1,1
-access_ife_module_user,ife.module.user,model_ife_module,base.group_user,1,1,1,1
-
-access_ife_foldername_user,ife.foldername.user,model_ife_foldername,base.group_user,1,1,1,1
+access_ife_repo_user,ife.repo.user,model_ife_repo,base.group_user,1,1,1,1
+access_ife_repo_branch_user,ife.repo.branch.user,model_ife_repo_branch,base.group_user,1,1,1,1
+access_ife_repo_module_user,ife.repo.module.user,model_ife_repo_module,base.group_user,1,1,1,1
+access_ife_environment_folder_user,ife.environment.folder.user,model_ife_environment_folder,base.group_user,1,1,1,1
+access_ife_environment_module_user,ife.environment.module.user,model_ife_environment_module,base.group_user,1,1,1,1

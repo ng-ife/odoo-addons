@@ -1,0 +1,37 @@
+<odoo>
+    <record id="view_repo_branch_list" model="ir.ui.view">
+        <field name="name">ife.repo.branch.list</field>
+        <field name="model">ife.repo.branch</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="repo_id"/>
+                <field name="name"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_repo_branch_form" model="ir.ui.view">
+        <field name="name">ife.repo.branch.form</field>
+        <field name="model">ife.repo.branch</field>
+        <field name="arch" type="xml">
+            <form>
+                <field name="is_cloned" invisible="1"/>
+                <field name="is_dirty" invisible="1"/>
+                <header>
+                    <button name="action_pull_branch" type="object" string="Pull Branch" class="btn-primary" invisible="is_cloned == False"/>
+                    <button name="action_commit_and_push_branch" type="object" string="Commit and Push" class="btn-primary" invisible="is_cloned == False or is_dirty == False"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="repo_id"/>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="ife_repo_branch_action" model="ir.actions.act_window">
+        <field name="name">Repository Branches</field>
+        <field name="res_model">ife.repo.branch</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>
