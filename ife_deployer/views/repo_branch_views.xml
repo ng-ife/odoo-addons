@@ -4,8 +4,9 @@
         <field name="model">ife.repo.branch</field>
         <field name="arch" type="xml">
             <list>
-                <field name="repo_id"/>
-                <field name="name"/>
+                <field name="repo_id" />
+                <field name="name" />
+                <field name="is_dirty" />
             </list>
         </field>
     </record>
@@ -14,16 +15,35 @@
         <field name="model">ife.repo.branch</field>
         <field name="arch" type="xml">
             <form>
-                <field name="is_cloned" invisible="1"/>
-                <field name="is_dirty" invisible="1"/>
+                <field name="is_cloned" invisible="1" />
+                <field name="is_dirty" invisible="1" />
                 <header>
-                    <button name="action_pull_branch" type="object" string="Pull Branch" class="btn-primary" invisible="is_cloned == False"/>
-                    <button name="action_commit_and_push_branch" type="object" string="Commit and Push" class="btn-primary" invisible="is_cloned == False or is_dirty == False"/>
+                    <button
+                        name="action_pull_branch"
+                        type="object"
+                        string="Pull Branch"
+                        class="btn-primary"
+                        invisible="is_cloned == False"
+                    />
+                    <button
+                        name="action_commit_and_push_branch"
+                        type="object"
+                        string="Commit and Push"
+                        class="btn-primary"
+                        invisible="is_cloned == False or is_dirty == False"
+                    />
+                    <button
+                        name="action_clean"
+                        type="object"
+                        string="Clean"
+                        class="btn-primary"
+                        invisible="is_cloned == False or is_dirty == False"
+                    />
                 </header>
                 <sheet>
                     <group>
-                        <field name="repo_id"/>
-                        <field name="name"/>
+                        <field name="repo_id" />
+                        <field name="name" />
                     </group>
                 </sheet>
             </form>

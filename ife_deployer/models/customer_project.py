@@ -7,15 +7,17 @@ class CustomerProject(models.Model):
 
     name = fields.Char(required=True)
     config_repo_id = fields.Many2one(
-        'ife.repo',
-        string='Config Repository',
+        "ife.repo",
+        string="Config Repository",
         required=True,
-        domain=[('type', '=', 'config')]
+        domain=[("type", "=", "config")],
+        copy=False
     )
     project_repo_id = fields.Many2one(
-        'ife.repo',
-        string='Project Repository',
+        "ife.repo",
+        string="Project Repository",
         required=True,
-        domain=[('type', '=', 'project')]
+        domain=[("type", "=", "project")],
+        copy=False
     )
-    environment_ids = fields.One2many("ife.environment", "customer_project_id")
+    environment_ids = fields.One2many("ife.environment", "customer_project_id", copy=False)

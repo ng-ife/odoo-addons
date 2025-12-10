@@ -4,9 +4,9 @@
         <field name="model">ife.repo</field>
         <field name="arch" type="xml">
             <list>
-                <field name="name"/>
-                <field name="github_url"/>
-                <field name="type"/>
+                <field name="name" />
+                <field name="github_url" />
+                <field name="type" />
             </list>
         </field>
     </record>
@@ -15,40 +15,50 @@
         <field name="model">ife.repo</field>
         <field name="arch" type="xml">
             <form>
-                <field name="is_cloned" invisible="1"/>
+                <field name="is_cloned" invisible="1" />
                 <header>
-                    <button name="action_clone_repo" type="object" string="Clone Repo" class="btn-primary" invisible="is_cloned == True"/>
+                    <button
+                        name="action_clone_repo"
+                        type="object"
+                        string="Clone Repo"
+                        class="btn-primary"
+                        invisible="is_cloned == True"
+                    />
                 </header>
                 <sheet>
                     <group>
-                        <field name="name"/>
-                        <field name="path"/>
-                        <field name="github_url"/>
-                        <field name="type"/>
+                        <field name="name" />
+                        <field name="path" />
+                        <field name="github_url" />
+                        <field name="type" />
                     </group>
-                        <div class="oe_button_box" name="button_box">
-                            <button name="action_open_branches"
-                                type="object"
-                                class="oe_stat_button"
-                                icon="fa-anchor"
-                                invisible="branch_count == 0">
-                                <div class="o_stat_info">
-                                    <span class="o_stat_value"><field name="branch_count"/></span>
-                                    <span class="o_stat_text">Branches</span>
-                                </div>
-                            </button>
-                        </div>
-                        <notebook>
-                            <page string="Branches">
-                                <field name="branch_ids">
-                                    <list>
-                                        <field name="name"/>
-                                        <field name="is_cloned"/>
-                                        <field name="is_dirty"/>
-                                    </list>
-                                </field>
-                            </page>
-                        </notebook>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            name="action_open_branches"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-anchor"
+                            invisible="branch_count == 0"
+                        >
+                            <div class="o_stat_info">
+                                <span class="o_stat_value">
+                                    <field name="branch_count" />
+                                </span>
+                                <span class="o_stat_text">Branches</span>
+                            </div>
+                        </button>
+                    </div>
+                    <notebook>
+                        <page string="Branches">
+                            <field name="branch_ids">
+                                <list>
+                                    <field name="name" />
+                                    <field name="is_cloned" />
+                                    <field name="is_dirty" />
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
                 </sheet>
             </form>
         </field>

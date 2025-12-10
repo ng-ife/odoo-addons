@@ -4,11 +4,11 @@
         <field name="model">ife.environment.folder</field>
         <field name="arch" type="xml">
             <list default_group_by="customer_project_id">
-                <field name="customer_project_id"/>
-                <field name="environment_id"/>
-                <field name="name"/>
-                <field name="repo_id"/>
-                <field name="ref"/>
+                <field name="customer_project_id" />
+                <field name="environment_id" />
+                <field name="name" />
+                <field name="repo_id" />
+                <field name="ref" />
             </list>
         </field>
     </record>
@@ -19,10 +19,10 @@
             <form>
                 <sheet>
                     <group>
-                        <field name="environment_id"/>
-                        <field name="name"/>
-                        <field name="repo_id"/>
-                        <field name="ref"/>
+                        <field name="environment_id" />
+                        <field name="name" />
+                        <field name="repo_id" />
+                        <field name="ref" />
                     </group>
                 </sheet>
             </form>

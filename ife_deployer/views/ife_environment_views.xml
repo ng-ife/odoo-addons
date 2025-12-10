@@ -4,9 +4,9 @@
         <field name="model">ife.environment</field>
         <field name="arch" type="xml">
             <list default_group_by="customer_project_id">
-                <field name="customer_project_id"/>
-                <field name="name"/>
-                <field name="branch_id"/>
+                <field name="customer_project_id" />
+                <field name="name" />
+                <field name="branch_id" />
             </list>
         </field>
     </record>
@@ -15,23 +15,63 @@
         <field name="model">ife.environment</field>
         <field name="arch" type="xml">
             <form>
+                <field name="is_dirty" invisible="1"/>
                 <header>
-                    <button name="export_config_yaml" string="Export Config YAML" type="object" class="oe_highlight"/>
+                    <button
+                        name="action_fetch_config_yamls"
+                        string="Fetch YAMLs"
+                        type="object"
+                        class="oe_highlight"
+                    />
+                    <button
+                        name="generate_config_yaml"
+                        string="Generate YAMLs"
+                        type="object"
+                        class="oe_highlight"
+                    />
+                    <button
+                        name="action_commit_config_yamls"
+                        string="Commit YAMLs"
+                        type="object"
+                        class="oe_highlight"
+                        invisible="is_dirty == True"
+                    />
+                    <button
+                        name="action_clean_repo"
+                        string="Clean Repo"
+                        type="object"
+                        class="oe_highlight"
+                        invisible="is_dirty == False"
+                    />
+                    <button
+                        name="action_copy_production_config"
+                        string="Get Production Environment"
+                        type="object"
+                        class="oe_highlight"
+                    />
                 </header>
+
                 <sheet>
                     <group>
-                        <field name="name"/>
-                        <field name="branch_id"/>
-                        <field name="customer_project_id"/>
+                        <field name="name" />
+                        <field name="branch_id" />
+                        <field name="customer_project_id" />
+                        <field name="type" />
                     </group>
                     <notebook>
                         <page string="Modules">
                             <field name="module_ids">
                                 <list>
-                                    <field name="name"/>
-                                    <field name="folder_id"/>
+                                    <field name="name" />
+                                    <field name="folder_id" />
                                 </list>
                             </field>
+                        </page>
+                        <page string="Addons YAML">
+                            <field name="addons_yaml" widget="text" />
+                        </page>
+                        <page string="Repos YAML">
+                            <field name="repos_yaml" widget="text" />
                         </page>
                     </notebook>
                 </sheet>
