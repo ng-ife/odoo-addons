@@ -1,14 +1,15 @@
-import os
 import io
 
 from ruamel.yaml import YAML
 
 from odoo import fields, models
+
 ENVIRONEMENT_TYPES = [
     ("dev", "Development"),
     ("stage", "Staging"),
     ("prod", "Production"),
 ]
+
 
 class Environment(models.Model):
     _name = "ife.environment"
@@ -22,7 +23,9 @@ class Environment(models.Model):
     branch_id = fields.Many2one(
         "ife.repo.branch", required=True, domain="[('repo_id', '=', repo_id)]"
     )
-    type = fields.Selection(ENVIRONEMENT_TYPES, string="Environment Type", required=True)
+    type = fields.Selection(
+        ENVIRONEMENT_TYPES, string="Environment Type", required=True
+    )
     is_dirty = fields.Boolean(related="repo_id.is_dirty")
     addons_yaml = fields.Text(string="Addons YAML")
     repos_yaml = fields.Text(string="Repos YAML")
@@ -36,8 +39,7 @@ class Environment(models.Model):
         stream = io.StringIO()
         yaml.dump(data_dict, stream)
         return stream.getvalue()
-    
-    
+
     def action_fetch_config_yamls(self):
         self.ensure_one()
         self.branch_id.action_pull_branch()
@@ -45,7 +47,6 @@ class Environment(models.Model):
         self.addons_yaml = self.branch_id.read_file("addons.yaml")
         self.generate_fields_from_yaml()
         return True
-    
 
     def generate_fields_from_yaml(self):
         self.ensure_one()
@@ -64,16 +65,31 @@ class Environment(models.Model):
                     repo_remote = repo_info.get("remotes", {})
                     repo_key, repo_url = next(iter(repo_remote.items()), None)
 
-                    repo = self.env["ife.repo"].search([("github_url", "=", repo_url)], limit=1)
+                    repo = self.env["ife.repo"].search(
+                        [("github_url", "=", repo_url)], limit=1
+                    )
                     if not repo and repo_url:
-                        repo = self.env["ife.repo"].create({"github_url": repo_url, "type": "module", "name": repo_folder, "path":  repo_folder})
-                    folder = self.env["ife.environment.folder"].create({
-                        "name": repo_folder,
-                        "repo_id": repo.id if repo else False,
-                        "ref": repo_info.get("merges", ["origin main"])[0].split(" ", 1)[1] if repo_info.get("merges") else "main",
-                        "environment_id": self.id,
-                        "customer_project_id": self.customer_project_id.id,
-                    })
+                        repo = self.env["ife.repo"].create(
+                            {
+                                "github_url": repo_url,
+                                "type": "module",
+                                "name": repo_folder,
+                                "path": repo_folder,
+                            }
+                        )
+                    folder = self.env["ife.environment.folder"].create(
+                        {
+                            "name": repo_folder,
+                            "repo_id": repo.id if repo else False,
+                            "ref": repo_info.get("merges", ["origin main"])[0].split(
+                                " ", 1
+                            )[1]
+                            if repo_info.get("merges")
+                            else "main",
+                            "environment_id": self.id,
+                            "customer_project_id": self.customer_project_id.id,
+                        }
+                    )
                 else:
                     folder = folder[0]
                     ref_list = repo_info.get("merges", [])
@@ -87,14 +103,18 @@ class Environment(models.Model):
                 folder = self.folder_ids.filtered(lambda f: f.name == repo_key)
                 if not folder:
                     # If folder missing, create it (repo creation handled above)
-                    repo = self.env["ife.repo"].search([("name", "=", repo_key)], limit=1)
-                    folder = self.env["ife.environment.folder"].create({
-                        "name": repo_key,
-                        "repo_id": repo.id if repo else False,
-                        "ref": "main",
-                        "environment_id": self.id,
-                        "customer_project_id": self.customer_project_id.id,
-                    })
+                    repo = self.env["ife.repo"].search(
+                        [("name", "=", repo_key)], limit=1
+                    )
+                    folder = self.env["ife.environment.folder"].create(
+                        {
+                            "name": repo_key,
+                            "repo_id": repo.id if repo else False,
+                            "ref": "main",
+                            "environment_id": self.id,
+                            "customer_project_id": self.customer_project_id.id,
+                        }
+                    )
                 else:
                     folder = folder[0]
 
@@ -102,31 +122,34 @@ class Environment(models.Model):
                 repo = folder.repo_id
                 for mod_name in module_names:
                     # Find or create repo module
-                    repo_module = self.env["ife.repo.module"].search([
-                        ("repo_id", "=", repo.id),
-                        ("name", "=", mod_name)
-                    ], limit=1)
+                    repo_module = self.env["ife.repo.module"].search(
+                        [("repo_id", "=", repo.id), ("name", "=", mod_name)], limit=1
+                    )
                     if not repo_module:
-                        repo_module = self.env["ife.repo.module"].create({
-                            "repo_id": repo.id,
-                            "name": mod_name
-                        })
+                        repo_module = self.env["ife.repo.module"].create(
+                            {"repo_id": repo.id, "name": mod_name}
+                        )
                     # Find or create environment module
-                    env_module = self.env["ife.environment.module"].search([
-                        ("environment_id", "=", self.id),
-                        ("folder_id", "=", folder.id),
-                        ("repo_module_id", "=", repo_module.id)
-                    ], limit=1)
+                    env_module = self.env["ife.environment.module"].search(
+                        [
+                            ("environment_id", "=", self.id),
+                            ("folder_id", "=", folder.id),
+                            ("repo_module_id", "=", repo_module.id),
+                        ],
+                        limit=1,
+                    )
                     if not env_module:
-                        env_module = self.env["ife.environment.module"].create({
-                            "folder_id": folder.id,
-                            "repo_module_id": repo_module.id,
-                        })
+                        env_module = self.env["ife.environment.module"].create(
+                            {
+                                "folder_id": folder.id,
+                                "repo_module_id": repo_module.id,
+                            }
+                        )
                     # Link module to folder
                     if env_module not in folder.module_ids:
                         folder.module_ids += env_module
         return True
-    
+
     def generate_config_yaml(self):
         self.ensure_one()
         repos = {}
@@ -155,19 +178,21 @@ class Environment(models.Model):
         self.branch_id.write_file("addons.yaml", self.addons_yaml)
         self.branch_id.action_commit_and_push_branch()
         return True
-    
+
     def action_clean_repo(self):
         self.ensure_one()
         self.repo_id.action_clean()
         return True
-    
+
     def action_copy_production_config(self):
         self.ensure_one()
-        prod_env = self.customer_project_id.environment_ids.filtered(lambda e: e.type == "prod")
+        prod_env = self.customer_project_id.environment_ids.filtered(
+            lambda e: e.type == "prod"
+        )
         if not prod_env:
             return False
         prod_env = prod_env[0]
         self.repos_yaml = prod_env.repos_yaml
         self.addons_yaml = prod_env.addons_yaml
         self.generate_fields_from_yaml()
-        return True 
+        return True

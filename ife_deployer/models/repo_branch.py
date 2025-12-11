@@ -1,7 +1,7 @@
-import subprocess
 import os
+import subprocess
 
-from odoo import api, fields, models
+from odoo import fields, models
 
 
 class RepoBranch(models.Model):
@@ -30,7 +30,7 @@ class RepoBranch(models.Model):
             error_msg = e.stderr or str(e)
             raise models.ValidationError(f"Git checkout failed: {error_msg}")
         return True
-    
+
     def action_clean(self):
         self.ensure_one()
         if not self.is_cloned:
@@ -45,7 +45,9 @@ class RepoBranch(models.Model):
             )
             current_branch = result.stdout.strip()
             if current_branch != self.name:
-                raise models.ValidationError(f"Not on branch '{self.name}'. Current branch: '{current_branch}'")
+                raise models.ValidationError(
+                    f"Not on branch '{self.name}'. Current branch: '{current_branch}'"
+                )
             self.repo_id.action_clean()
         except subprocess.CalledProcessError as e:
             error_msg = e.stderr or str(e)
@@ -97,18 +99,18 @@ class RepoBranch(models.Model):
             error_msg = e.stderr or str(e)
             raise models.ValidationError(f"Git commit/push failed: {error_msg}")
         return True
-    
+
     def read_file(self, file_path):
         self.ensure_one()
         self.checkout()
         full_file_path = os.path.join(self.full_path, file_path)
         try:
-            with open(full_file_path, "r") as f:
+            with open(full_file_path) as f:
                 content = f.read()
         except Exception as e:
             raise models.ValidationError(f"Failed to read file: {str(e)}")
         return content
-    
+
     def write_file(self, file_path, content):
         self.ensure_one()
         self.checkout()

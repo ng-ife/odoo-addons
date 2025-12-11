@@ -58,7 +58,7 @@ class Repo(models.Model):
         for rec in self:
             path = rec.full_path
             rec.is_cloned = os.path.isdir(os.path.join(path, ".git"))
-            
+
     @api.depends("path")
     def _compute_is_dirty(self):
         for rec in self:
@@ -98,7 +98,7 @@ class Repo(models.Model):
                     error_msg = e.stderr or str(e)
                     raise models.ValidationError(f"Git clone failed: {error_msg}")
         return True
-    
+
     def action_clean(self):
         for rec in self:
             if not rec.is_cloned:

@@ -15,7 +15,7 @@
         <field name="model">ife.environment</field>
         <field name="arch" type="xml">
             <form>
-                <field name="is_dirty" invisible="1"/>
+                <field name="is_dirty" invisible="1" />
                 <header>
                     <button
                         name="action_fetch_config_yamls"

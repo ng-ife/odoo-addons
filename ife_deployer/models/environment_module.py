@@ -7,7 +7,7 @@ class EnvironmentModule(models.Model):
     _description = "Environment Module"
 
     name = fields.Char(compute="_compute_name", store=True)
-    folder_id = fields.Many2one("ife.environment.folder", required=True,copy=False)
+    folder_id = fields.Many2one("ife.environment.folder", required=True, copy=False)
     folder_repo_id = fields.Many2one(
         "ife.repo", string="Folder Repository", related="folder_id.repo_id"
     )
@@ -20,7 +20,6 @@ class EnvironmentModule(models.Model):
     environment_id = fields.Many2one(
         "ife.environment", string="Environment", related="folder_id.environment_id"
     )
-    
 
     _sql_constraints = [
         (

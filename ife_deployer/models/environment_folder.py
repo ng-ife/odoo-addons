@@ -1,4 +1,4 @@
-from odoo import api, fields, models
+from odoo import fields, models
 
 
 class EnvironmentFolder(models.Model):
@@ -23,7 +23,7 @@ class EnvironmentFolder(models.Model):
             "Folder name must be unique per environment!",
         ),
     ]
-    
+
     def _compute_display_name(self):
         for rec in self:
             rec.display_name = f"{rec.environment_id.name} - {rec.name}"

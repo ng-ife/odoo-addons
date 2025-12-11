@@ -11,13 +11,15 @@ class CustomerProject(models.Model):
         string="Config Repository",
         required=True,
         domain=[("type", "=", "config")],
-        copy=False
+        copy=False,
     )
     project_repo_id = fields.Many2one(
         "ife.repo",
         string="Project Repository",
         required=True,
         domain=[("type", "=", "project")],
-        copy=False
+        copy=False,
     )
-    environment_ids = fields.One2many("ife.environment", "customer_project_id", copy=False)
+    environment_ids = fields.One2many(
+        "ife.environment", "customer_project_id", copy=False
+    )
