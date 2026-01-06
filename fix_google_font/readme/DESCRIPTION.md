@@ -1,0 +1,1 @@
+Removes Google Fonts from calls

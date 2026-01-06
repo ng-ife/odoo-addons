@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
 
 
-<template id="layout" name="Main layout" inherit_id="website.layout">
+<template id="layout" name="Main layout" inherit_id="website.layout" priority="99">
     <xpath expr="//link[@href='https://fonts.gstatic.com/']" position="replace">
     </xpath>
 </template>
