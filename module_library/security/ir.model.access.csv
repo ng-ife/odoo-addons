@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_module_library,module.library,model_module_library,base.group_user,1,1,1,1
+access_git_repository,git.repository,model_git_repository,base.group_user,1,1,1,1
+access_module_library_module,module.library.module,model_module_library_module,base.group_user,1,1,1,1

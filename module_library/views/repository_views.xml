@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_git_repository_form" model="ir.ui.view">
+        <field name="name">git.repository.form</field>
+        <field name="model">git.repository</field>
+        <field name="arch" type="xml">
+            <form string="Git Repository">
+                <header>
+                    <button
+                        name="action_scan_repository"
+                        string="Jetzt Scannen"
+                        type="object"
+                        class="oe_highlight"
+                    />
+                    <field name="state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only" />
+                        <h1><field name="name" placeholder="z.B. Odoo Community" /></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="library_id" />
+                            <field name="git_url" />
+                            <field name="branch" />
+                        </group>
+                        <group>
+                            <field name="git_user" />
+                            <field name="access_token" password="True" />
+                            <field name="last_scan" readonly="1" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Gefundene Module">
+                            <field name="module_ids">
+                                <tree>
+                                    <field name="name" />
+                                    <field name="technical_name" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_git_repository_tree" model="ir.ui.view">
+        <field name="name">git.repository.tree</field>
+        <field name="model">git.repository</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="library_id" />
+                <field name="git_url" />
+                <field name="state" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_git_repository" model="ir.actions.act_window">
+        <field name="name">Repositories</field>
+        <field name="res_model">git.repository</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

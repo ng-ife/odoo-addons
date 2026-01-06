@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <menuitem id="menu_git_library_root" name="Module Library" sequence="10" />
+
+    <menuitem
+        id="menu_library"
+        parent="menu_git_library_root"
+        action="action_module_library"
+        sequence="1"
+        name="Bibliotheken"
+    />
+
+    <menuitem
+        id="menu_git_repository"
+        parent="menu_git_library_root"
+        action="action_git_repository"
+        sequence="5"
+        name="Repositories"
+    />
+
+    <menuitem
+        id="menu_modules"
+        parent="menu_git_library_root"
+        action="action_module_library_module"
+        sequence="10"
+        name="Alle Module"
+    />
+</odoo>

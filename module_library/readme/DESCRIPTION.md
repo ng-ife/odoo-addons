@@ -1,0 +1,1 @@
+Scan Git Repos and build a module library from the content
